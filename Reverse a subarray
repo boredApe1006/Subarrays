@@ -1,0 +1,78 @@
+import java.io.*;
+import java.util.*;
+
+class Solution{    
+    static boolean solve(int arr[],int N){
+        //Write your code here
+// 		0 1 2 3 4
+//  arr=>  1 2 5 4 3
+// temp	1 2 3 4 5	 
+// 	start index 2  end index 4 
+// 			reverse(start,end)
+// 		I will check if it is array is sorted or not
+      int []temp = new int[N];
+		for(int i =0; i < N; ++i) {
+			temp[i] = arr[i];
+		}
+		Arrays.sort(temp);
+
+		int start = -1; int end = -1;
+		for(int i =0; i < N; ++i) {
+			if(arr[i] != temp[i]) {
+				start = i;
+				break;
+			}
+		}
+	//	a start - 1  start      end end + 1 end + 2
+
+		for(int i = N-1; i >= 0; --i) {
+			if(arr[i] != temp[i]) {
+				end = i;
+				break;
+			}
+		}
+ // System.out.println(start + " " + end);
+		// Array is already sorted
+		if(start == -1) return true;
+
+		// reverse subarray from start to end
+
+	  while(start < end) {
+		  int storedValue = arr[start];
+		  arr[start] = arr[end];
+		  arr[end] = storedValue;
+		  ++start;
+		  --end;
+	  }
+   //    for(int i =0; i < N; ++i) {
+		 //  System.out.print(arr[i] + " ");
+	  // }
+		// to check after reversing my array is sorted or not
+		boolean isSorted = true;
+		for(int i =0; i < N-1;++i) {
+			if(arr[i] > arr[i+1]) {
+				isSorted = false;
+			}
+		}
+		return isSorted;
+    }
+}
+
+class Main{
+    public static void main(String args[])throws IOException{    
+        Scanner sc=new Scanner(System.in);
+        int N=sc.nextInt();
+        int arr[]=new int[N];
+
+        for(int i=0;i<N;i++)
+            arr[i]=sc.nextInt();
+
+        Solution ob=new Solution();
+        boolean ans=ob.solve(arr,N);
+        
+        if(ans==true)
+            System.out.println("Yes");
+        else
+            System.out.println("No");
+    }
+}

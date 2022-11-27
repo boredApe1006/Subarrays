@@ -1,0 +1,31 @@
+https://course.acciojob.com/idle?question=91c9bcd9-0057-4787-b2e4-04c055dddac4
+
+import java.util.*;
+
+
+public class Main {
+
+	
+    public static long largestAltitude(int[] gain,int n) {
+        // Write code here
+		long ans = 0;
+		long currentSum = 0;
+		for(int i = 0; i < n; ++i) {
+			currentSum = currentSum + gain[i];
+			ans = Math.max(ans,currentSum);
+		}
+		return ans;
+    }
+	
+    public static void main (String[] args) throws java.lang.Exception
+    {
+      Scanner sc=new Scanner(System.in);
+      int n=sc.nextInt(); 
+      int gain[]=new int[n]; 
+      for(int i=0;i<n;++i){
+         gain[i]=sc.nextInt(); 
+       }
+        System.out.println(largestAltitude(gain,n));
+    }
+}
+

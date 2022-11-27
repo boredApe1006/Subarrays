@@ -1,0 +1,56 @@
+import java.util.*;
+class Main{
+
+   public static  String convertDecimalToString(int i, int n) {
+
+		 String ans = "";
+		 int len = 0;
+		 while(i != 0) {
+			 int last = i%2;
+			 ans = last + ans;
+				 i = i/2;
+			 ++len;
+		 }
+		 while(len < n) {
+			 ans = 0 + ans;
+			 ++len;
+		 }
+		 
+		 return ans;
+	 } 
+	
+	public static void main(String[] args){
+
+  Scanner scn = new Scanner(System.in);
+		int n = scn.nextInt();
+		int[] arr = new int[n];
+
+		for(int i = 0; i < n ;i++) {
+			arr[i]=scn.nextInt();
+		}
+
+
+		int limit = (int)Math.pow(2,n) - 1;
+		ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+		for(int i = 1; i <= limit; i++) {
+			String currentSet = convertDecimalToString(i,n);
+			ArrayList<Integer> current = new ArrayList<>();
+			for(int j = 0; j < n; ++j) {
+				if(currentSet.charAt(j) == '1') {
+					current.add(arr[j]);
+				}
+			}
+			ans.add(current);
+		}
+
+       for(int i = 0; i < ans.size(); ++i) {
+		   ArrayList<Integer> ithSubset = ans.get(i);
+		   for(int j =0; j < ithSubset.size(); ++j) {
+			   System.out.print(ithSubset.get(j) + " ");
+		   }
+		   System.out.println();
+	   }
+		
+	}
+
+} // class
